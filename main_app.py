@@ -59,8 +59,11 @@ def get_conversation_string():
     return conversation_string
 
 # Function to display messages
-def message(text, key):
-    st.text(text)
+def message(text, is_user=False, key=None):
+    if is_user:
+        st.text(f"User: {text}")
+    else:
+        st.text(f"Bot: {text}")
 
 # Main application
 def main():
