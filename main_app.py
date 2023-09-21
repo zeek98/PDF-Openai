@@ -12,6 +12,7 @@ from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain.prompts import SystemMessagePromptTemplate
 from langchain.prompts import HumanMessagePromptTemplate
 from langchain.prompts import ChatPromptTemplate
+from langchain.prompts import MessagesPlaceholder
 import pinecone
 import openai
 import os
