@@ -17,7 +17,7 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Initialize Pinecone
 pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
-index = pinecone.Index('dp-index')
+index = pinecone.Index('demo-run')
 
 # Utility functions
 def find_match(input):
