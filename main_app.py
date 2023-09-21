@@ -13,6 +13,7 @@ from langchain.prompts import SystemMessagePromptTemplate
 from langchain.prompts import HumanMessagePromptTemplate
 from langchain.prompts import ChatPromptTemplate
 from langchain.prompts import MessagesPlaceholder
+from langchain.chains.conversation import ConversationChain
 import pinecone
 import openai
 import os
