@@ -11,6 +11,7 @@ from sentence_transformers import SentenceTransformer
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from langchain.prompts import SystemMessagePromptTemplate
 from langchain.prompts import HumanMessagePromptTemplate
+from langchain.prompts import ChatPromptTemplate
 import pinecone
 import openai
 import os
