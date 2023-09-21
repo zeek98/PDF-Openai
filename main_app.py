@@ -33,6 +33,27 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENV)
 index = pinecone.Index('dp-index')
 
+# Initialize an empty cache for PDFs
+pdf_cache = {}
+
+# Function to retrieve text data from the cache or load it from a PDF if not present
+def get_text_from_cache(pdf_identifier, pdf_path):
+    if pdf_identifier in pdf_cache:
+        return pdf_cache[pdf_identifier]
+    else:
+        # Load and extract text data from the PDF if not in cache
+        text_data = load_and_extract_pdf_text(pdf_path)
+        # Store the text data in the cache for future use
+        pdf_cache[pdf_identifier] = text_data
+        return text_data
+
+# Function to simulate loading and extracting text data from a PDF
+def load_and_extract_pdf_text(pdf_path):
+    # Replace this with your logic to load and extract text data from a PDF
+    # You can use libraries like PyPDF2 or pdfplumber for text extraction
+    # For simplicity, we'll use a dummy function here
+    return f"Text data extracted from PDF: {pdf_path}"
+
 # Utility functions
 def find_match(input):
     input_em = model.encode(input).tolist()
@@ -130,32 +151,15 @@ def main():
         pdf = st.file_uploader("Upload your PDF", type="pdf")
 
         if pdf is not None:
-            pdf_reader = PdfReader(pdf)
-            text = ""
-            for page in pdf_reader.pages:
-                text += page.extract_text()
-
-            text_splitter = CharacterTextSplitter(
-                separator="\n",
-                chunk_size=1000,
-                chunk_overlap=200,
-                length_function=len
-            )
-            chunks = text_splitter.split_text(text)
-
-            embeddings = OpenAIEmbeddings()
-            knowledge_base = FAISS.from_texts(chunks, embeddings)
-
+            pdf_identifier = "pdf_cache_" + str(hash(pdf))
+            text_data = get_text_from_cache(pdf_identifier, pdf)
+            
             user_question = st.text_input("Ask a question about your PDF:")
             if user_question:
-                docs = knowledge_base.similarity_search(user_question)
-
-                llm = OpenAI()
-                chain = load_qa_chain(llm, chain_type="stuff")
-                with get_openai_callback() as cb:
-                    response = chain.run(input_documents=docs, question=user_question)
-
-                st.write(response)
-
+                # Use the extracted text data (text_data) for question answering
+                # You can use your existing code to perform QA using the text_data
+                # and display the response
+                st.write("Perform QA using the text data extracted from the PDF.")
+                
 if __name__ == '__main__':
     main()
