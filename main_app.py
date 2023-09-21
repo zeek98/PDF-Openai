@@ -58,6 +58,10 @@ def get_conversation_string():
         conversation_string += "Bot: " + st.session_state['responses'][i + 1] + "\n"
     return conversation_string
 
+# Function to display messages
+def message(text, key):
+    st.text(text)
+
 # Main application
 def main():
     st.set_page_config(page_title="Chat and PDF QA")
