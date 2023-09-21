@@ -9,6 +9,7 @@ from langchain.llms import OpenAI
 from langchain.callbacks import get_openai_callback
 from sentence_transformers import SentenceTransformer
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
+from langchain.prompts import SystemMessagePromptTemplate
 import pinecone
 import openai
 import os
