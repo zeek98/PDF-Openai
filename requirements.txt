@@ -18,3 +18,4 @@ tiktoken
 sentence_transformers
 streamlit_chat
 PyPDF2
+faiss-cpu==1.7.4
